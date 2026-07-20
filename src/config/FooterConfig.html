@@ -25,18 +25,19 @@
     ❧ ⚜ ❧
   </div>
   
-  <!-- ===== 主体行 ===== -->
-  <div class="footer-main-row" style="position: relative; z-index: 2; display: flex; align-items: center; justify-content: center; gap: 6px; margin: 4px 0; flex-wrap: wrap; padding: 0 10px;">
+  <!-- ===== 主体行：Grid 三列，中间列强制居中 ===== -->
+  <div class="footer-main-row" style="position: relative; z-index: 2; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 6px; margin: 4px 0; padding: 0 10px;">
     
-    <div style="display: flex; align-items: center; gap: 1px; font-size: 14px; color: #8a7a6a; opacity: 0.4;">
-      <span>╔</span><span style="font-size: 12px;">☩</span><span>╗</span>
+    <!-- 左侧装饰：靠右对齐（贴近十字架） -->
+    <div class="side-decor" style="display: flex; justify-content: flex-end; align-items: center; gap: 6px; flex-wrap: wrap; min-width: 0;">
+      <div style="display: flex; align-items: center; gap: 1px; font-size: 14px; color: #8a7a6a; opacity: 0.4;">
+        <span>╔</span><span style="font-size: 12px;">☩</span><span>╗</span>
+      </div>
+      <div style="font-size: 10px; color: #8a7a6a; letter-spacing: 2px; opacity: 0.3;">━━ ✦ ━━</div>
+      <div style="font-size: 20px; color: #d4878f; text-shadow: 0 0 20px rgba(212,135,143,0.3); animation: roseGlow 3s ease-in-out infinite 0.5s;">❀</div>
     </div>
     
-    <div style="font-size: 10px; color: #8a7a6a; letter-spacing: 2px; opacity: 0.3;">━━ ✦ ━━</div>
-    
-    <div style="font-size: 20px; color: #d4878f; text-shadow: 0 0 20px rgba(212,135,143,0.3); animation: roseGlow 3s ease-in-out infinite 0.5s;">❀</div>
-    
-    <!-- ===== 十字架 + 光晕（绑在一起） ===== -->
+    <!-- ===== 十字架 + 光晕（Grid 中间列，天然居中） ===== -->
     <div class="cross-wrap" style="position: relative; display: inline-block; animation: crossPulse 3s ease-in-out infinite;">
       
       <!-- 光晕层 - 用 clamp() 让尺寸随视口收窄，避免撑破容器 -->
@@ -51,12 +52,13 @@
     </div>
     <!-- ===== 十字架 + 光晕结束 ===== -->
     
-    <div style="font-size: 20px; color: #d4878f; text-shadow: 0 0 20px rgba(212,135,143,0.3); animation: roseGlow 3s ease-in-out infinite 0.5s;">❀</div>
-    
-    <div style="font-size: 10px; color: #8a7a6a; letter-spacing: 2px; opacity: 0.3;">━━ ✦ ━━</div>
-    
-    <div style="display: flex; align-items: center; gap: 1px; font-size: 14px; color: #8a7a6a; opacity: 0.4;">
-      <span>╚</span><span style="font-size: 12px;">☩</span><span>╝</span>
+    <!-- 右侧装饰：靠左对齐（贴近十字架），与左侧镜像 -->
+    <div class="side-decor" style="display: flex; justify-content: flex-start; align-items: center; gap: 6px; flex-wrap: wrap; min-width: 0;">
+      <div style="font-size: 20px; color: #d4878f; text-shadow: 0 0 20px rgba(212,135,143,0.3); animation: roseGlow 3s ease-in-out infinite 0.5s;">❀</div>
+      <div style="font-size: 10px; color: #8a7a6a; letter-spacing: 2px; opacity: 0.3;">━━ ✦ ━━</div>
+      <div style="display: flex; align-items: center; gap: 1px; font-size: 14px; color: #8a7a6a; opacity: 0.4;">
+        <span>╚</span><span style="font-size: 12px;">☩</span><span>╝</span>
+      </div>
     </div>
   </div>
   
@@ -142,10 +144,14 @@
     100% { opacity: 0.4; transform: scale(1); }
   }
 
-  /* ===== 手机端专项收窄 ===== */
-  @media (max-width: 420px) {
+  /* ===== 手机端：两边装饰太挤时先隐藏边角括号和虚线，只留玫瑰贴近十字架 ===== */
+  @media (max-width: 400px) {
+    .footer-main-row .side-decor > div:first-child,
+    .footer-main-row .side-decor > div:nth-child(2) {
+      display: none !important;
+    }
     .footer-main-row {
-      gap: 3px !important;
+      gap: 10px !important;
     }
     .dove-row {
       gap: 12px !important;
