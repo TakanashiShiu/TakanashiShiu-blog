@@ -306,3 +306,9 @@ body.wallpaper-transparent .twikoo .OwO .OwO-body {
 .twikoo .tk-comment {
   overflow: visible !important;
 }
+.twikoo .OwO .OwO-body {
+  /* 让表情面板在图标上方弹出 */
+  bottom: 100% !important;
+  top: auto !important;
+  margin-bottom: 8px;
+}
