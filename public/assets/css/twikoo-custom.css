@@ -278,64 +278,61 @@ body.wallpaper-transparent .twikoo .OwO .OwO-body {
   -webkit-backdrop-filter: blur(12px);
 }
 /* ==================================================
- * OwO 表情选择框终极修复（高权重版）
+ * OwO 表情选择框终极强制修正
  * ================================================== */
 
-/* 1. 强制解锁所有可能的父级容器溢出限制 */
+/* 1. 彻底清空父级的溢出裁切 */
 .twikoo,
-.twikoo .tk-main,
+.twikoo .tk-comments,
+.twikoo .tk-submit,
 .twikoo .tk-row,
-.twikoo .tk-actions,
-.twikoo .tk-input,
-.twikoo .tk-comment,
-.twikoo .OwO-container {
+.twikoo .tk-row-actions,
+.twikoo .tk-row-actions-start,
+.twikoo .OwO {
   overflow: visible !important;
 }
 
-/* 2. 定位基准容器 */
+/* 2. 确保图标容器作为绝对定位的参照基准 */
 .twikoo .OwO,
-.OwO {
+.twikoo .tk-submit-action-icon {
   position: relative !important;
-  display: inline-block !important;
 }
 
-/* 3. 强制重置表情弹窗主体：向上弹出、取消外层滚动条 */
-body .twikoo .OwO .OwO-body,
-body .OwO .OwO-body {
+/* 3. 核心修复：干掉 top:0，强行向上弹出 */
+html body .twikoo .OwO .OwO-body,
+html body .OwO-body {
   position: absolute !important;
-  bottom: calc(100% + 12px) !important;
+  /* 强制覆盖木木样式里的 top: 0 */
+  top: auto !important; 
+  bottom: calc(100% + 8px) !important;
   left: 0 !important;
-  top: auto !important;
 
   width: 320px !important;
   max-width: 85vw !important;
   max-height: none !important;
   height: auto !important;
-  overflow: hidden !important; /* 禁用外层双滚动条 */
+  overflow: hidden !important; /* 彻底干掉面板外层滚动条 */
 
   z-index: 99999 !important;
-  border: 1px solid var(--tk-border, #444) !important;
-  background-color: var(--tk-bg, #1a1a1a) !important;
+  border: 1px solid var(--tk-border, #333) !important;
+  background-color: var(--tk-bg, #1f1f1f) !important;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
   border-radius: 8px !important;
   padding: 0 !important;
 }
 
-/* 4. 内部唯一允许滚动的表情展示区 */
-body .twikoo .OwO .OwO-body .OwO-scroll,
-body .twikoo .OwO .OwO-body .OwO-items,
-body .OwO .OwO-body .OwO-scroll,
-body .OwO .OwO-body .OwO-items {
+/* 4. 仅保留表情区域内部滚动 */
+html body .twikoo .OwO .OwO-body .OwO-scroll,
+html body .twikoo .OwO .OwO-body .OwO-items {
   max-height: 200px !important;
-  overflow-y: auto !important; /* 单滚动条 */
+  overflow-y: auto !important;
   padding: 10px !important;
   box-sizing: border-box !important;
 }
 
-/* 5. 底部分类 Tab 栏固定 */
-body .twikoo .OwO .OwO-body .OwO-bar,
-body .OwO .OwO-body .OwO-bar {
-  border-top: 1px solid var(--tk-border, #444) !important;
-  background-color: var(--tk-bg, #1a1a1a) !important;
+/* 5. 底部分类栏样式重置 */
+html body .twikoo .OwO .OwO-body .OwO-bar {
+  border-top: 1px solid var(--tk-border, #333) !important;
+  background-color: var(--tk-bg, #1f1f1f) !important;
   margin: 0 !important;
 }
