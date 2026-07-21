@@ -3,6 +3,7 @@ title: 如何从日常生活正确审视自身？
 published: 2026-07-21
 description: 简单的人生感悟
 image: ./katerinavulcova-leaves-7597975_1920.jpg
+tags: [随笔, 思考, 成长]
 category: 感悟
 draft: false
 ---
