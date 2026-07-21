@@ -278,10 +278,10 @@ body.wallpaper-transparent .twikoo .OwO .OwO-body {
   -webkit-backdrop-filter: blur(12px);
 }
 /* --------------------------------------------------
- * OwO 表情选择框终极修复（布局 + 宽度 + 方向）
+ * OwO 表情选择框终极修复（单滚动条 + 底部 Tab 固定）
  * -------------------------------------------------- */
 
-/* 1. 确保图标所在容器有定位基准，并且不裁切溢出内容 */
+/* 1. 父级溢出解锁与定位基准 */
 .twikoo .tk-row,
 .twikoo .tk-actions,
 .twikoo .tk-input,
@@ -294,38 +294,38 @@ body.wallpaper-transparent .twikoo .OwO .OwO-body {
   display: inline-block !important;
 }
 
-/* 2. 彻底重置 OwO 面板的尺寸和定位 */
+/* 2. 外层容器：只负责整体定位、宽度、边框阴影，【不产生】滚动条 */
 .twikoo .OwO .OwO-body {
   position: absolute !important;
-  /* 向上弹出，避免压住提交按钮 */
-  bottom: 100% !important;
-  top: auto !important;
+  bottom: calc(100% + 10px) !important;
   left: 0 !important;
-  margin-bottom: 8px !important;
+  top: auto !important;
 
-  /* 核心：强制恢复宽度，防止被压扁成一竖条 */
-  width: 320px !important;         /* 给一个固定的合适宽度 */
-  max-width: 85vw !important;     /* 移动端/窄屏时防超屏 */
-  max-height: 200px !important;    /* 限制高度 */
-  overflow-y: auto !important;     /* 内部可上下滚动 */
-  box-sizing: border-box !important;
+  width: 320px !important;
+  max-width: 85vw !important;
+  max-height: none !important; /* 隐藏外层最大高度限制 */
+  overflow: hidden !important;   /* 禁用外层滚动条，隐藏溢出 */
 
-  /* 层级与美化 */
   z-index: 9999 !important;
   border: 1px solid var(--tk-border) !important;
   background-color: var(--tk-bg) !important;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35) !important;
   border-radius: 8px !important;
-  padding: 8px !important;
+  padding: 0 !important; /* 边距交给内部元素，避免排版挤压 */
 }
 
-/* 3. 确保里面的表情项水平正常排列（防变形） */
+/* 3. 表情列表区域：唯一允许滚动的区域 */
+.twikoo .OwO .OwO-body .OwO-scroll,
 .twikoo .OwO .OwO-body .OwO-items {
-  display: flex !important;
-  flex-wrap: wrap !important;
-  white-space: normal !important;
+  max-height: 200px !important;  /* 表情区域的最大高度 */
+  overflow-y: auto !important;   /* 只在这里保留【唯一的】垂直滚动条 */
+  padding: 10px !important;
+  box-sizing: border-box !important;
 }
 
-.twikoo .OwO .OwO-body .OwO-item {
-  box-sizing: border-box !important;
+/* 4. 底部 Tab 栏（颜文字 / Emoji / Bilibili）：固定底色与分割线 */
+.twikoo .OwO .OwO-body .OwO-bar {
+  border-top: 1px solid var(--tk-border) !important;
+  background-color: var(--tk-bg) !important;
+  margin: 0 !important;
 }
