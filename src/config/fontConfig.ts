@@ -135,8 +135,5 @@ export const fontConfig: FontSelectionConfig = {
 			// 额外包含的字符
 			extraChars: "",
 		},
-        "--font-chikushi-a-maru": {
-            extraChars: "", // 补充动态内容中可能用到的字符
-        },
-    },
+	},
 };
