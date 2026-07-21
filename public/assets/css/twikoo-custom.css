@@ -278,61 +278,61 @@ body.wallpaper-transparent .twikoo .OwO .OwO-body {
   -webkit-backdrop-filter: blur(12px);
 }
 /* ==================================================
- * OwO 表情选择框终极强制修正
+ * OwO 表情选择框终极强制修正（DOM结构匹配版）
  * ================================================== */
 
-/* 1. 彻底清空父级的溢出裁切 */
+/* 1. 强制解锁所有上级容器的溢出限制 */
 .twikoo,
-.twikoo .tk-comments,
 .twikoo .tk-submit,
 .twikoo .tk-row,
 .twikoo .tk-row-actions,
-.twikoo .tk-row-actions-start,
-.twikoo .OwO {
+.twikoo .tk-row-actions-start {
   overflow: visible !important;
 }
 
-/* 2. 确保图标容器作为绝对定位的参照基准 */
-.twikoo .OwO,
-.twikoo .tk-submit-action-icon {
+/* 2. 关键：修正图标父容器，允许内部子元素溢出定位 */
+.twikoo .tk-submit-action-icon,
+.twikoo .tk-submit-action-icon.OwO {
   position: relative !important;
+  overflow: visible !important;
 }
 
-/* 3. 核心修复：干掉 top:0，强行向上弹出 */
-html body .twikoo .OwO .OwO-body,
+/* 3. 强制重置 OwO-body 面板：向上弹出，取消外层滚动条 */
+html body .twikoo .tk-submit-action-icon .OwO-body,
+html body .twikoo .OwO-body,
 html body .OwO-body {
   position: absolute !important;
-  /* 强制覆盖木木样式里的 top: 0 */
+  /* 强行抹平 top，向上弹出 */
   top: auto !important; 
-  bottom: calc(100% + 8px) !important;
+  bottom: calc(100% + 10px) !important;
   left: 0 !important;
 
   width: 320px !important;
   max-width: 85vw !important;
   max-height: none !important;
   height: auto !important;
-  overflow: hidden !important; /* 彻底干掉面板外层滚动条 */
+  overflow: hidden !important; /* 干掉多余滚动条 */
 
   z-index: 99999 !important;
   border: 1px solid var(--tk-border, #333) !important;
-  background-color: var(--tk-bg, #1f1f1f) !important;
+  background-color: var(--tk-bg, #1a1a1a) !important;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
   border-radius: 8px !important;
   padding: 0 !important;
 }
 
-/* 4. 仅保留表情区域内部滚动 */
-html body .twikoo .OwO .OwO-body .OwO-scroll,
-html body .twikoo .OwO .OwO-body .OwO-items {
+/* 4. 仅保留表情展示区内部唯一滚动 */
+html body .twikoo .OwO-body .OwO-scroll,
+html body .twikoo .OwO-body .OwO-items {
   max-height: 200px !important;
   overflow-y: auto !important;
   padding: 10px !important;
   box-sizing: border-box !important;
 }
 
-/* 5. 底部分类栏样式重置 */
-html body .twikoo .OwO .OwO-body .OwO-bar {
+/* 5. 固定底部分类 Tab 栏 */
+html body .twikoo .OwO-body .OwO-bar {
   border-top: 1px solid var(--tk-border, #333) !important;
-  background-color: var(--tk-bg, #1f1f1f) !important;
+  background-color: var(--tk-bg, #1a1a1a) !important;
   margin: 0 !important;
 }
