@@ -278,37 +278,39 @@ body.wallpaper-transparent .twikoo .OwO .OwO-body {
   -webkit-backdrop-filter: blur(12px);
 }
 /* --------------------------------------------------
- * OwO 表情选择框定位与层级修复
+ * OwO 表情面板强力定位与溢出修复
  * -------------------------------------------------- */
 
-/* 1. 确保表情按钮容器相对定位，防止弹出框找错参照物 */
-.twikoo .OwO {
-  position: relative !important;
-}
-
-/* 2. 修复表情弹窗的层级与高度限制，解决遮挡与超出问题 */
-.twikoo .OwO .OwO-body {
-  position: absolute !important;
-  z-index: 999 !important; /* 提升层级，防止被下方元素遮挡 */
-  
-  /* 限制最大高度，如果表情太多自动出滚动条，防止把页面撑爆 */
-  max-height: 220px !important; 
-  overflow-y: auto !important;
-  
-  /* 优雅的阴影，避免与背景融为一体 */
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-  border-radius: 8px;
-}
-
-/* 3. 防止父级评论容器剪裁了溢出的表情框 */
+/* 1. 解锁工具栏与提交区域的溢出隐藏（最关键的一步） */
+.twikoo .tk-row,
+.twikoo .tk-actions,
 .twikoo .tk-input,
-.twikoo .tk-comments-container,
-.twikoo .tk-comment {
+.twikoo .tk-row .tk-col,
+.twikoo .OwO-container {
   overflow: visible !important;
 }
+
+/* 2. 重置 OwO 容器为定位基准 */
+.twikoo .OwO {
+  position: relative !important;
+  display: inline-block !important;
+}
+
+/* 3. 让表情框向上弹出（推荐），一劳永逸避免被底部裁切 */
 .twikoo .OwO .OwO-body {
-  /* 让表情面板在图标上方弹出 */
-  bottom: 100% !important;
+  position: absolute !important;
+  bottom: 100% !important; /* 强制在图标上方弹出 */
+  left: 0 !important;
   top: auto !important;
-  margin-bottom: 8px;
+  margin-bottom: 10px !important; /* 与图标拉开 10px 距离 */
+  
+  /* 层级与尺寸防护 */
+  z-index: 9999 !important;
+  max-height: 250px !important;
+  overflow-y: auto !important;
+  
+  /* 增加边框与外阴影，提升在暗色模式下的质感 */
+  border: 1px solid var(--tk-border) !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3) !important;
+  border-radius: 8px !important;
 }
