@@ -278,56 +278,64 @@ body.wallpaper-transparent .twikoo .OwO .OwO-body {
   -webkit-backdrop-filter: blur(12px);
 }
 /* ==================================================
- * OwO 表情选择框终极修复（纯净语法版）
+ * OwO 表情选择框终极修复（高权重版）
  * ================================================== */
 
-/* 1. 解除父级容器的溢出裁切，确保弹窗能正常展示 */
+/* 1. 强制解锁所有可能的父级容器溢出限制 */
+.twikoo,
+.twikoo .tk-main,
 .twikoo .tk-row,
 .twikoo .tk-actions,
 .twikoo .tk-input,
-.twikoo .OwO-container,
-.twikoo .tk-comment {
+.twikoo .tk-comment,
+.twikoo .OwO-container {
   overflow: visible !important;
 }
 
-/* 2. 重置 OwO 容器为定位基准 */
-.twikoo .OwO {
+/* 2. 定位基准容器 */
+.twikoo .OwO,
+.OwO {
   position: relative !important;
   display: inline-block !important;
 }
 
-/* 3. 修复面板：强制向上弹出，只保留单滚动条 */
-.twikoo .OwO .OwO-body {
+/* 3. 强制重置表情弹窗主体：向上弹出、取消外层滚动条 */
+body .twikoo .OwO .OwO-body,
+body .OwO .OwO-body {
   position: absolute !important;
-  bottom: calc(100% + 10px) !important;
+  bottom: calc(100% + 12px) !important;
   left: 0 !important;
   top: auto !important;
 
   width: 320px !important;
   max-width: 85vw !important;
   max-height: none !important;
-  overflow: hidden !important;
+  height: auto !important;
+  overflow: hidden !important; /* 禁用外层双滚动条 */
 
   z-index: 99999 !important;
-  border: 1px solid var(--tk-border) !important;
-  background-color: var(--tk-bg) !important;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35) !important;
+  border: 1px solid var(--tk-border, #444) !important;
+  background-color: var(--tk-bg, #1a1a1a) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
   border-radius: 8px !important;
   padding: 0 !important;
 }
 
-/* 4. 允许表情内部唯一区域滚动 */
-.twikoo .OwO .OwO-body .OwO-scroll,
-.twikoo .OwO .OwO-body .OwO-items {
+/* 4. 内部唯一允许滚动的表情展示区 */
+body .twikoo .OwO .OwO-body .OwO-scroll,
+body .twikoo .OwO .OwO-body .OwO-items,
+body .OwO .OwO-body .OwO-scroll,
+body .OwO .OwO-body .OwO-items {
   max-height: 200px !important;
-  overflow-y: auto !important;
+  overflow-y: auto !important; /* 单滚动条 */
   padding: 10px !important;
   box-sizing: border-box !important;
 }
 
-/* 5. 固定底部分类 Tab 栏 */
-.twikoo .OwO .OwO-body .OwO-bar {
-  border-top: 1px solid var(--tk-border) !important;
-  background-color: var(--tk-bg) !important;
+/* 5. 底部分类 Tab 栏固定 */
+body .twikoo .OwO .OwO-body .OwO-bar,
+body .OwO .OwO-body .OwO-bar {
+  border-top: 1px solid var(--tk-border, #444) !important;
+  background-color: var(--tk-bg, #1a1a1a) !important;
   margin: 0 !important;
 }
