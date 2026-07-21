@@ -278,39 +278,54 @@ body.wallpaper-transparent .twikoo .OwO .OwO-body {
   -webkit-backdrop-filter: blur(12px);
 }
 /* --------------------------------------------------
- * OwO 表情面板强力定位与溢出修复
+ * OwO 表情选择框终极修复（布局 + 宽度 + 方向）
  * -------------------------------------------------- */
 
-/* 1. 解锁工具栏与提交区域的溢出隐藏（最关键的一步） */
+/* 1. 确保图标所在容器有定位基准，并且不裁切溢出内容 */
 .twikoo .tk-row,
 .twikoo .tk-actions,
 .twikoo .tk-input,
-.twikoo .tk-row .tk-col,
 .twikoo .OwO-container {
   overflow: visible !important;
 }
 
-/* 2. 重置 OwO 容器为定位基准 */
 .twikoo .OwO {
   position: relative !important;
   display: inline-block !important;
 }
 
-/* 3. 让表情框向上弹出（推荐），一劳永逸避免被底部裁切 */
+/* 2. 彻底重置 OwO 面板的尺寸和定位 */
 .twikoo .OwO .OwO-body {
   position: absolute !important;
-  bottom: 100% !important; /* 强制在图标上方弹出 */
-  left: 0 !important;
+  /* 向上弹出，避免压住提交按钮 */
+  bottom: 100% !important;
   top: auto !important;
-  margin-bottom: 10px !important; /* 与图标拉开 10px 距离 */
-  
-  /* 层级与尺寸防护 */
+  left: 0 !important;
+  margin-bottom: 8px !important;
+
+  /* 核心：强制恢复宽度，防止被压扁成一竖条 */
+  width: 320px !important;         /* 给一个固定的合适宽度 */
+  max-width: 85vw !important;     /* 移动端/窄屏时防超屏 */
+  max-height: 200px !important;    /* 限制高度 */
+  overflow-y: auto !important;     /* 内部可上下滚动 */
+  box-sizing: border-box !important;
+
+  /* 层级与美化 */
   z-index: 9999 !important;
-  max-height: 250px !important;
-  overflow-y: auto !important;
-  
-  /* 增加边框与外阴影，提升在暗色模式下的质感 */
   border: 1px solid var(--tk-border) !important;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3) !important;
+  background-color: var(--tk-bg) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3) !important;
   border-radius: 8px !important;
+  padding: 8px !important;
+}
+
+/* 3. 确保里面的表情项水平正常排列（防变形） */
+.twikoo .OwO .OwO-body .OwO-items {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  white-space: normal !important;
+}
+
+.twikoo .OwO .OwO-body .OwO-item {
+  box-sizing: border-box !important;
 }
