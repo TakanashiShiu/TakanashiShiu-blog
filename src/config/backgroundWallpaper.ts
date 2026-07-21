@@ -83,7 +83,10 @@ export const backgroundWallpaper: BackgroundWallpaperConfig = {
 			// 主页横幅主标题
 			title: "小鳥遊詩雨の境界線",
 			// 主页横幅主标题字体大小
-			titleSize: "3.8rem",
+			titleSize: {
+                desktop: "3.8rem",
+                mobile: "2rem",
+         },
 			// 主页横幅副标题
 			subtitle: [
 				"小舟从此逝，江海寄余生",
