@@ -277,3 +277,32 @@ body.wallpaper-transparent .twikoo .OwO .OwO-body {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
+/* --------------------------------------------------
+ * OwO 表情选择框定位与层级修复
+ * -------------------------------------------------- */
+
+/* 1. 确保表情按钮容器相对定位，防止弹出框找错参照物 */
+.twikoo .OwO {
+  position: relative !important;
+}
+
+/* 2. 修复表情弹窗的层级与高度限制，解决遮挡与超出问题 */
+.twikoo .OwO .OwO-body {
+  position: absolute !important;
+  z-index: 999 !important; /* 提升层级，防止被下方元素遮挡 */
+  
+  /* 限制最大高度，如果表情太多自动出滚动条，防止把页面撑爆 */
+  max-height: 220px !important; 
+  overflow-y: auto !important;
+  
+  /* 优雅的阴影，避免与背景融为一体 */
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+}
+
+/* 3. 防止父级评论容器剪裁了溢出的表情框 */
+.twikoo .tk-input,
+.twikoo .tk-comments-container,
+.twikoo .tk-comment {
+  overflow: visible !important;
+}
